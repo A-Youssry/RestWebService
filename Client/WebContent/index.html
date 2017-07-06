@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+<meta charset="ISO-8859-1">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+<title>Client</title>
+</head>
+<body ng-controller="productController">
+
+<table cellpadding="2" cellspacing="2" border="1">
+	<tr>
+		<th>ID</th>
+		<th>Name</th>
+		<th>Price</th>
+		<th>Quantity</th>
+	</tr>
+	<tr ng-repeat = "product in result">
+		<td>{{product.id}}</td>
+		<td>{{product.name}}</td>
+		<td>{{product.price}}</td>
+		<td>{{product.quantity}}</td>
+	
+	</tr>
+
+</table>
+
+<script type="text/javascript">
+	var myapp = angular.module('myapp',[]);
+	myapp.controller('productController',function($scope,$http){
+		$http.get('http://localhost:9080/RestWebServise_Angular_Demo/rest/product/findall')
+		.success(function(response){
+			$scope.result =response.product;
+		});
+	});
+</script>
+</body>
+</html>
